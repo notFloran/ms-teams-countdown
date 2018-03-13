@@ -1,0 +1,13 @@
+{
+    "name": "notfloran/ms-teams-countdown",
+    "description": "Countdown for Microsoft Teams",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Floran Brutel",
+            "email": "me@floran.fr"
+        }
+    ],
+    "require": {}
+}
