@@ -14,10 +14,12 @@
             "NotFloran\\MsTeamsCountdown\\": "src/"
         }
     },
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "league/climate": "^3.2"
+    },
     "config": {
         "sort-packages": true,
-        "bin-dir": "bin/"
     },
-    "bin": ["bin/ms-teams-countdown"]
+    "bin": ["ms-teams-countdown"]
 }

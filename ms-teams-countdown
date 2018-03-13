@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . "/vendor/autoload.php";
+
+$climate = new \League\CLImate\CLImate;
+
+$climate->arguments->add([
+    'webhook-url' => [
+        'prefix'       => 'wu',
+        'longPrefix'   => 'webhook-url',
+        'description'  => 'URL of the webhook',
+        'required'    => true,
+    ],
+    'deadline' => [
+        'prefix'      => 'd',
+        'longPrefix'  => 'deadline',
+        'description' => 'Specify the deadline in ISO format: yyyy-mm-dd',
+        'required'    => true,
+    ],
+]);
+
+$climate->arguments->parse();
+
+$webhookUrl = $climate->arguments->get('webhook-url');
+$deadline = $climate->arguments->get('deadline');
+
+$currentDate = new \DateTime();
+$deadlineDate = \DateTime::createFromFormat('Y-m-d', $deadline);
+
+$nbDays = $deadlineDate->diff($currentDate)->format("%a");
+
+$text = sprintf('%d days until %s', $nbDays, $deadline);
+
+$data = [
+    'text' => $text,
+];
+
+
+$client = new \GuzzleHttp\Client();
+$client->post($webhookUrl, ['json' => $data], [
+    'Content-Type' => 'application/json',
+]);
