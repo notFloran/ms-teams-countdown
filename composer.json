@@ -9,5 +9,15 @@
             "email": "me@floran.fr"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "NotFloran\\MsTeamsCountdown\\": "src/"
+        }
+    },
+    "require": {},
+    "config": {
+        "sort-packages": true,
+        "bin-dir": "bin/"
+    },
+    "bin": ["bin/ms-teams-countdown"]
 }
