@@ -19,7 +19,7 @@
         "league/climate": "^3.2"
     },
     "config": {
-        "sort-packages": true,
+        "sort-packages": true
     },
     "bin": ["ms-teams-countdown"]
 }
