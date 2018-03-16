@@ -16,7 +16,8 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "league/climate": "^3.2"
+        "league/climate": "^3.2",
+        "nesbot/carbon": "^1.24"
     },
     "config": {
         "sort-packages": true

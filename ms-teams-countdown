@@ -3,7 +3,10 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$climate = new \League\CLImate\CLImate;
+use Carbon\Carbon;
+use \League\CLImate\CLImate;
+
+$climate = new CLImate;
 
 $climate->arguments->add([
     'webhook-url' => [
@@ -25,12 +28,10 @@ $climate->arguments->parse();
 $webhookUrl = $climate->arguments->get('webhook-url');
 $deadline = $climate->arguments->get('deadline');
 
-$currentDate = new \DateTime();
-$deadlineDate = \DateTime::createFromFormat('Y-m-d', $deadline);
+$from = new Carbon();
+$to = Carbon::parse($deadline);
 
-$nbDays = $deadlineDate->diff($currentDate)->format("%a");
-
-$text = sprintf('%d days until %s', $nbDays, $deadline);
+$text = sprintf('%d days until %s', $to->diffInWeekdays($from), $deadline);
 
 $data = [
     'text' => $text,
