@@ -21,17 +21,28 @@ $climate->arguments->add([
         'description' => 'Specify the deadline in ISO format: yyyy-mm-dd',
         'required'    => true,
     ],
+    'event' => [
+        'prefix'      => 'e',
+        'longPrefix'  => 'event',
+        'description' => 'Name of the deadline event',
+        'required'    => true,
+    ],
 ]);
 
 $climate->arguments->parse();
 
 $webhookUrl = $climate->arguments->get('webhook-url');
 $deadline = $climate->arguments->get('deadline');
+$event = $climate->arguments->get('event');
 
 $from = new Carbon();
 $to = Carbon::parse($deadline);
 
-$text = sprintf('%d days until %s', $to->diffInWeekdays($from), $deadline);
+$text = sprintf(
+        '%d days until %s',
+        $to->diffInWeekdays($from),
+        $event ?? $deadline
+);
 
 $data = [
     'text' => $text,
